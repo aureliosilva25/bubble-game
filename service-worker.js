@@ -1,10 +1,10 @@
-const CACHE_NAME = "bubble-color-v12";
+const CACHE_NAME = "bubble-color-v13";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
-    "./css/style.css",
+    "./css/style.css?v13",
     "./js/levels.js",
     "./js/game.js",
     "./icons/icon-192.png",
