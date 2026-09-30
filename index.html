@@ -1,36 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<link rel="icon" href="icons/favicon.ico">
 
-<link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="icons/icon-32.png"
->
-
-<link
-    rel="apple-touch-icon"
-    sizes="180x180"
-    href="icons/apple-touch-icon.png"
->
-
-<meta name="theme-color" content="#111827">
-
-<meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
->
-
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
->
-
-<meta
-    name="apple-mobile-web-app-title"
-    content="Bubble Color"
->
 <head>
 
     <meta charset="UTF-8">
@@ -40,24 +10,70 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     >
 
+    <title>Bubble Color</title>
+
+    <!-- =====================================================
+         CONFIGURAÇÕES DO APLICATIVO
+         ===================================================== -->
+
+    <meta name="theme-color" content="#111827">
+
     <meta
-        name="theme-color"
-        content="#111827"
+        name="apple-mobile-web-app-capable"
+        content="yes"
     >
 
-    <title>Bubble Color</title>
-<link rel="manifest" href="manifest.json">
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
 
-<link rel="icon" href="icons/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Bubble Color"
+    >
 
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Bubble Color">    <link
+
+    <!-- =====================================================
+         PWA
+         ===================================================== -->
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+
+    <!-- =====================================================
+         ÍCONES
+         ===================================================== -->
+
+    <link
+        rel="icon"
+        href="icons/favicon.ico"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="icons/icon-32.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="icons/apple-touch-icon.png"
+    >
+
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+
+    <link
         rel="stylesheet"
-        href="css/style.css?v=8"
+        href="css/style.css?v=12"
     >
 
 </head>
@@ -79,32 +95,49 @@
 
             <div class="home-content">
 
+
+                <!-- LOGO -->
+
                 <div class="logo-area">
 
                     <div class="logo-bubbles">
 
                         <span class="logo-ball red"></span>
+
                         <span class="logo-ball blue"></span>
+
                         <span class="logo-ball green"></span>
+
                         <span class="logo-ball yellow"></span>
 
                     </div>
 
 
                     <h1>
+
                         BUBBLE
-                        <span>COLOR</span>
+
+                        <span>
+                            COLOR
+                        </span>
+
                     </h1>
 
 
                     <p class="subtitle">
+
                         Combine, estoure e avance!
+
                     </p>
 
                 </div>
 
 
+
+                <!-- ESTATÍSTICAS -->
+
                 <div class="home-stats">
+
 
                     <div class="stat-card">
 
@@ -131,10 +164,15 @@
 
                     </div>
 
+
                 </div>
 
 
+
+                <!-- BOTÕES -->
+
                 <div class="home-buttons">
+
 
                     <button
                         id="btnContinue"
@@ -157,12 +195,16 @@
 
                     </button>
 
+
                 </div>
 
 
                 <p class="game-version">
+
                     Bubble Color
+
                 </p>
+
 
             </div>
 
@@ -179,7 +221,9 @@
             class="screen"
         >
 
+
             <header class="top-bar">
+
 
                 <button
                     id="btnLevelsBack"
@@ -191,6 +235,7 @@
                     ←
 
                 </button>
+
 
 
                 <div class="top-title">
@@ -206,6 +251,7 @@
                 </div>
 
 
+
                 <div class="coins-display">
 
                     🪙
@@ -216,8 +262,12 @@
 
                 </div>
 
+
             </header>
 
+
+
+            <!-- PROGRESSO -->
 
             <div class="progress-container">
 
@@ -233,6 +283,9 @@
             </div>
 
 
+
+            <!-- FASES -->
+
             <main class="levels-content">
 
                 <div
@@ -241,6 +294,7 @@
                 ></div>
 
             </main>
+
 
         </section>
 
@@ -255,7 +309,11 @@
             class="screen"
         >
 
+
+            <!-- CABEÇALHO -->
+
             <header class="game-header">
+
 
                 <button
                     id="btnGameBack"
@@ -267,6 +325,7 @@
                     ←
 
                 </button>
+
 
 
                 <div class="level-display">
@@ -282,6 +341,7 @@
                 </div>
 
 
+
                 <div class="score-display">
 
                     <small>
@@ -294,22 +354,30 @@
 
                 </div>
 
+
             </header>
 
 
 
-            <!-- OBJETIVO -->
+            <!-- =================================================
+                 OBJETIVO
+                 ================================================= -->
 
             <div class="objective-bar">
 
+
                 <div class="objective-description">
+
 
                     <span
                         id="objectiveIcon"
                         class="objective-icon"
                     >
-                        🎯
+
+                        💥
+
                     </span>
+
 
 
                     <div>
@@ -319,18 +387,22 @@
                         </small>
 
                         <strong id="objectiveText">
-                            Complete a fase
+
+                            Elimine todas as bolinhas
+
                         </strong>
 
                     </div>
 
+
                 </div>
+
 
 
                 <div class="target-display">
 
                     <small>
-                        META
+                        RESTANTES
                     </small>
 
                     <strong id="targetScore">
@@ -339,13 +411,17 @@
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- ÁREA PRINCIPAL DO JOGO -->
+            <!-- =================================================
+                 TABULEIRO
+                 ================================================= -->
 
             <div class="game-board-wrapper">
+
 
                 <canvas id="gameCanvas"></canvas>
 
@@ -359,14 +435,19 @@
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- INFORMAÇÕES INFERIORES -->
+            <!-- =================================================
+                 PARTE INFERIOR
+                 ================================================= -->
 
             <div class="game-bottom">
 
+
+                <!-- JOGADAS -->
 
                 <div class="moves-card">
 
@@ -382,7 +463,10 @@
 
 
 
+                <!-- BOLINHAS -->
+
                 <div class="shooter-preview">
+
 
                     <div class="next-container">
 
@@ -398,6 +482,7 @@
                     </div>
 
 
+
                     <div class="current-container">
 
                         <small>
@@ -411,9 +496,12 @@
 
                     </div>
 
+
                 </div>
 
 
+
+                <!-- TROCAR -->
 
                 <button
                     id="btnSwap"
@@ -429,7 +517,9 @@
 
                 </button>
 
+
             </div>
+
 
         </section>
 
@@ -444,7 +534,9 @@
             class="modal"
         >
 
+
             <div class="modal-card win-card">
+
 
                 <div class="modal-icon">
                     🏆
@@ -466,6 +558,7 @@
                 </div>
 
 
+
                 <div class="result-row">
 
                     <span>
@@ -477,6 +570,7 @@
                     </strong>
 
                 </div>
+
 
 
                 <div class="result-row">
@@ -498,6 +592,7 @@
                 </div>
 
 
+
                 <button
                     id="btnNextLevel"
                     class="main-button primary-button"
@@ -507,6 +602,7 @@
                     PRÓXIMA FASE ▶
 
                 </button>
+
 
 
                 <button
@@ -519,7 +615,9 @@
 
                 </button>
 
+
             </div>
+
 
         </div>
 
@@ -534,21 +632,30 @@
             class="modal"
         >
 
+
             <div class="modal-card lose-card">
 
+
                 <div class="modal-icon">
+
                     😵
+
                 </div>
 
 
                 <h2>
+
                     TENTE NOVAMENTE
+
                 </h2>
 
 
                 <p>
+
                     Você ainda consegue!
+
                 </p>
+
 
 
                 <button
@@ -562,6 +669,7 @@
                 </button>
 
 
+
                 <button
                     id="btnLoseLevels"
                     class="modal-secondary-button"
@@ -572,7 +680,9 @@
 
                 </button>
 
+
             </div>
+
 
         </div>
 
@@ -587,16 +697,23 @@
             class="modal"
         >
 
+
             <div class="modal-card">
 
+
                 <div class="modal-icon">
+
                     ⏸️
+
                 </div>
 
 
                 <h2>
+
                     JOGO PAUSADO
+
                 </h2>
+
 
 
                 <button
@@ -610,6 +727,7 @@
                 </button>
 
 
+
                 <button
                     id="btnExitLevel"
                     class="modal-secondary-button"
@@ -620,7 +738,9 @@
 
                 </button>
 
+
             </div>
+
 
         </div>
 
@@ -630,69 +750,62 @@
 
 
     <!-- =====================================================
-         SCRIPTS DO JOGO
+         JAVASCRIPT DO JOGO
 
          IMPORTANTE:
-         levels.js precisa carregar antes de game.js.
+         levels.js precisa carregar antes de game.js
          ===================================================== -->
 
-    <script src="js/levels.js?v=10"></script>
+    <script src="js/levels.js?v=12"></script>
 
-    <script src="js/game.js?v=10"></script>
+    <script src="js/game.js?v=12"></script>
 
-<script>
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker
-            .register("./service-worker.js")
-            .then(() => {
-                console.log("Bubble Color PWA ativo");
-            })
-            .catch(error => {
-                console.error("Erro no PWA:", error);
-            });
-    });
-}
-</script>
+
+
+    <!-- =====================================================
+         SERVICE WORKER
+         ===================================================== -->
+
+    <script>
+
+        if ("serviceWorker" in navigator) {
+
+            window.addEventListener(
+                "load",
+                function () {
+
+                    navigator.serviceWorker
+                        .register("./service-worker.js")
+
+                        .then(
+                            function (registration) {
+
+                                console.log(
+                                    "Bubble Color PWA ativo"
+                                );
+
+                            }
+                        )
+
+                        .catch(
+                            function (error) {
+
+                                console.error(
+                                    "Erro ao ativar PWA:",
+                                    error
+                                );
+
+                            }
+                        );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
 </body>
-<link rel="manifest" href="manifest.json">
 
-<link rel="icon" href="icons/favicon.ico">
-
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="icons/icon-32.png"
->
-
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="icons/apple-touch-icon.png"
->
-
-<meta name="theme-color" content="#111827">
-
-<meta
-  name="apple-mobile-web-app-capable"
-  content="yes"
->
-
-<meta
-  name="apple-mobile-web-app-status-bar-style"
-  content="black-translucent"
->
-
-<meta
-  name="apple-mobile-web-app-title"
-  content="Bubble Color"
-><link rel="manifest" href="manifest.json">
-<link rel="icon" href="icons/favicon.ico">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Bubble Color">
 </html>
