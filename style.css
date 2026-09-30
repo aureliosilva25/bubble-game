@@ -1,0 +1,1483 @@
+/* =========================================================
+   BUBBLE COLOR V9
+   STYLE.CSS
+   Compatível com o index.html atual
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONFIGURAÇÕES GERAIS
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #1e3a8a 0%,
+            #172554 30%,
+            #0f172a 70%,
+            #020617 100%
+        );
+
+    color: #ffffff;
+}
+
+body {
+    touch-action: manipulation;
+}
+
+button {
+    font-family: inherit;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+#app {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+
+    max-width: 620px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #172554 0%,
+            #0f172a 45%,
+            #020617 100%
+        );
+
+    box-shadow:
+        0 0 50px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   2. TELAS
+   ========================================================= */
+
+.screen {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   3. TELA INICIAL
+   ========================================================= */
+
+#homeScreen {
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        20px
+        max(20px, env(safe-area-inset-bottom));
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(59, 130, 246, 0.35),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #172554 0%,
+            #0f172a 55%,
+            #020617 100%
+        );
+}
+
+.home-content {
+    width: 100%;
+    max-width: 390px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   4. LOGOTIPO
+   ========================================================= */
+
+.logo-area {
+    margin-bottom: 35px;
+}
+
+.logo-bubbles {
+    position: relative;
+
+    width: 145px;
+    height: 105px;
+
+    margin: 0 auto 8px;
+}
+
+.logo-ball {
+    position: absolute;
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    border: 3px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        inset -8px -10px 12px rgba(0, 0, 0, 0.25),
+        inset 7px 7px 10px rgba(255, 255, 255, 0.35),
+        0 7px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo-ball::after {
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    top: 10px;
+    left: 12px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    transform: rotate(-25deg);
+}
+
+.logo-ball.red {
+    background: #ef4444;
+
+    left: 12px;
+    top: 30px;
+}
+
+.logo-ball.blue {
+    background: #3b82f6;
+
+    right: 12px;
+    top: 30px;
+}
+
+.logo-ball.green {
+    background: #22c55e;
+
+    left: 43px;
+    top: 0;
+}
+
+.logo-ball.yellow {
+    background: #facc15;
+
+    left: 43px;
+    bottom: 0;
+}
+
+.logo-area h1 {
+    margin: 0;
+
+    font-size: clamp(42px, 12vw, 64px);
+    line-height: 0.87;
+
+    font-weight: 1000;
+
+    letter-spacing: -3px;
+
+    text-shadow:
+        0 5px 0 rgba(0, 0, 0, 0.2),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo-area h1 span {
+    display: block;
+
+    color: #facc15;
+
+    text-shadow:
+        0 4px 0 #ca8a04,
+        0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.subtitle {
+    margin: 15px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   5. ESTRELAS E MOEDAS DA HOME
+   ========================================================= */
+
+.home-stats {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin: 0 auto 30px;
+}
+
+.stat-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 125px;
+
+    padding: 12px 18px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(51, 65, 85, 0.9),
+            rgba(30, 41, 59, 0.9)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.08),
+        0 7px 18px rgba(0, 0, 0, 0.22);
+
+    font-size: 21px;
+}
+
+.stat-card strong {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   6. BOTÕES PRINCIPAIS
+   ========================================================= */
+
+.home-buttons {
+    width: 100%;
+}
+
+.main-button {
+    display: block;
+
+    width: 100%;
+
+    min-height: 57px;
+
+    margin: 12px 0;
+
+    padding: 14px 20px;
+
+    border: 0;
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    letter-spacing: 0.3px;
+
+    transition:
+        transform 0.12s ease,
+        filter 0.12s ease;
+
+    box-shadow:
+        inset 0 2px rgba(255, 255, 255, 0.25),
+        0 7px 0 rgba(0, 0, 0, 0.22),
+        0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+.main-button:hover {
+    filter: brightness(1.08);
+}
+
+.main-button:active {
+    transform: translateY(4px);
+
+    box-shadow:
+        inset 0 2px rgba(255, 255, 255, 0.2),
+        0 3px 0 rgba(0, 0, 0, 0.22);
+}
+
+.primary-button {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #60a5fa,
+            #2563eb
+        );
+}
+
+.secondary-button {
+    color: #422006;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fde047,
+            #facc15
+        );
+}
+
+.game-version {
+    margin-top: 28px;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   7. CABEÇALHO
+   ========================================================= */
+
+.top-bar,
+.game-header {
+    flex-shrink: 0;
+
+    display: grid;
+
+    grid-template-columns: 60px 1fr 90px;
+
+    align-items: center;
+
+    min-height: 68px;
+
+    padding:
+        max(8px, env(safe-area-inset-top))
+        12px
+        8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #172554,
+            #111827
+        );
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.25);
+
+    z-index: 5;
+}
+
+.icon-button {
+    width: 45px;
+    height: 45px;
+
+    border: 0;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background: #334155;
+
+    font-size: 26px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.top-title {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+}
+
+.top-title strong {
+    font-size: 20px;
+}
+
+.top-title small {
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+.coins-display {
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 8px 11px;
+
+    border-radius: 13px;
+
+    background: #1e293b;
+
+    color: #facc15;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   8. PROGRESSO DAS FASES
+   ========================================================= */
+
+.progress-container {
+    flex-shrink: 0;
+
+    padding: 13px 18px;
+
+    background: #0f172a;
+}
+
+.progress-track {
+    width: 100%;
+    height: 11px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #334155;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+    width: 1%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #22c55e,
+            #4ade80
+        );
+
+    box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.5);
+
+    transition: width 0.35s ease;
+}
+
+
+/* =========================================================
+   9. MAPA DAS 100 FASES
+   ========================================================= */
+
+.levels-content {
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding:
+        18px
+        15px
+        max(30px, env(safe-area-inset-bottom));
+
+    background:
+        radial-gradient(
+            circle at top,
+            #1e3a8a,
+            #0f172a 45%,
+            #020617
+        );
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.levels-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 11px;
+
+    width: 100%;
+}
+
+.level-button {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    min-width: 0;
+
+    border: 0;
+    border-radius: 17px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #475569,
+            #334155
+        );
+
+    font-size: 18px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 2px rgba(255, 255, 255, 0.13),
+        0 5px 0 #1e293b,
+        0 7px 10px rgba(0, 0, 0, 0.25);
+
+    transition: transform 0.12s ease;
+}
+
+.level-button b {
+    display: block;
+
+    font-size: 18px;
+}
+
+.level-button:active:not(.locked) {
+    transform: translateY(3px);
+}
+
+.level-button.current {
+    color: #422006;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fde047,
+            #eab308
+        );
+
+    box-shadow:
+        inset 0 2px rgba(255, 255, 255, 0.35),
+        0 5px 0 #a16207,
+        0 0 18px rgba(250, 204, 21, 0.45);
+}
+
+.level-button.completed {
+    background:
+        linear-gradient(
+            180deg,
+            #22c55e,
+            #15803d
+        );
+
+    box-shadow:
+        inset 0 2px rgba(255, 255, 255, 0.2),
+        0 5px 0 #166534;
+}
+
+.level-button.locked {
+    cursor: default;
+
+    opacity: 0.55;
+
+    color: #94a3b8;
+
+    background:
+        linear-gradient(
+            180deg,
+            #334155,
+            #1e293b
+        );
+}
+
+.level-stars {
+    display: block;
+
+    margin-top: 3px;
+
+    white-space: nowrap;
+
+    font-size: clamp(7px, 2.2vw, 10px);
+
+    letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   10. CABEÇALHO DA FASE
+   ========================================================= */
+
+.game-header {
+    grid-template-columns: 60px 1fr 100px;
+
+    min-height: 64px;
+}
+
+.level-display,
+.score-display {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.level-display {
+    align-items: center;
+}
+
+.score-display {
+    align-items: flex-end;
+}
+
+.level-display small,
+.score-display small {
+    margin-bottom: 2px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.level-display strong {
+    font-size: 23px;
+
+    color: #facc15;
+}
+
+.score-display strong {
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   11. OBJETIVO
+   ========================================================= */
+
+.objective-bar {
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    min-height: 60px;
+
+    padding: 8px 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1e293b,
+            #172033
+        );
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.07);
+}
+
+.objective-description {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.objective-icon {
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 12px;
+
+    background: #334155;
+
+    font-size: 21px;
+}
+
+.objective-description div {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.objective-description small,
+.target-display small {
+    color: #94a3b8;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.objective-description strong {
+    overflow: hidden;
+
+    max-width: 220px;
+
+    margin-top: 2px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 12px;
+}
+
+.target-display {
+    flex-shrink: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+}
+
+.target-display strong {
+    margin-top: 2px;
+
+    color: #facc15;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   12. TABULEIRO
+   ========================================================= */
+
+.game-board-wrapper {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(37, 99, 235, 0.42),
+            transparent 48%
+        ),
+        linear-gradient(
+            180deg,
+            #172554 0%,
+            #0f172a 75%,
+            #020617 100%
+        );
+}
+
+.game-board-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.22;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.25) 1px,
+            transparent 1px
+        );
+
+    background-size: 25px 25px;
+}
+
+#gameCanvas {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    touch-action: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   13. COMBO
+   ========================================================= */
+
+.combo-message {
+    position: absolute;
+
+    left: 50%;
+    top: 45%;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.5);
+
+    color: #facc15;
+
+    font-size: 34px;
+    font-weight: 1000;
+
+    text-shadow:
+        0 3px 0 #a16207,
+        0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.combo-message.show {
+    animation: comboAnimation 0.8s ease-out;
+}
+
+@keyframes comboAnimation {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.5);
+    }
+
+    25% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.3);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -90%)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   14. ÁREA INFERIOR DO JOGO
+   ========================================================= */
+
+.game-bottom {
+    flex-shrink: 0;
+
+    display: grid;
+
+    grid-template-columns: 82px 1fr 82px;
+
+    align-items: center;
+
+    min-height: 94px;
+
+    padding:
+        8px
+        12px
+        max(8px, env(safe-area-inset-bottom));
+
+    background:
+        linear-gradient(
+            180deg,
+            #111827,
+            #020617
+        );
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 -6px 15px rgba(0, 0, 0, 0.22);
+
+    z-index: 5;
+}
+
+.moves-card {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 62px;
+
+    padding: 7px;
+
+    border-radius: 15px;
+
+    background: #1e293b;
+}
+
+.moves-card small {
+    color: #94a3b8;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.moves-card strong {
+    margin-top: 2px;
+
+    color: #facc15;
+
+    font-size: 27px;
+}
+
+
+/* =========================================================
+   15. BOLINHA ATUAL E PRÓXIMA
+   ========================================================= */
+
+.shooter-preview {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: 22px;
+}
+
+.next-container,
+.current-container {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.next-container small,
+.current-container small {
+    color: #94a3b8;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+}
+
+.preview-ball {
+    position: relative;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+
+    background: #ef4444;
+
+    box-shadow:
+        inset -6px -7px 8px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 7px rgba(255, 255, 255, 0.35),
+        0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.preview-ball::after {
+    content: "";
+
+    position: absolute;
+
+    width: 25%;
+    height: 20%;
+
+    top: 17%;
+    left: 21%;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    transform: rotate(-25deg);
+}
+
+.next-ball {
+    width: 34px;
+    height: 34px;
+}
+
+.current-ball {
+    width: 48px;
+    height: 48px;
+}
+
+
+/* =========================================================
+   16. BOTÃO TROCAR
+   ========================================================= */
+
+.swap-button {
+    justify-self: end;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 67px;
+    height: 62px;
+
+    border: 0;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #475569,
+            #334155
+        );
+
+    font-size: 25px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.15),
+        0 4px 0 #1e293b;
+}
+
+.swap-button small {
+    margin-top: 1px;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   17. MODAIS
+   ========================================================= */
+
+.modal {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(2, 6, 23, 0.82);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 355px;
+
+    padding: 28px 23px;
+
+    border-radius: 26px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #334155,
+            #1e293b
+        );
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.12),
+        0 25px 60px rgba(0, 0, 0, 0.55);
+
+    animation: modalOpen 0.25s ease-out;
+}
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.modal-icon {
+    margin-bottom: 7px;
+
+    font-size: 60px;
+}
+
+.modal-card h2 {
+    margin: 8px 0 12px;
+
+    font-size: 24px;
+    font-weight: 1000;
+}
+
+.modal-card p {
+    margin: 0 0 20px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   18. RESULTADO
+   ========================================================= */
+
+.win-stars {
+    margin: 12px 0 20px;
+
+    font-size: 34px;
+
+    letter-spacing: 4px;
+}
+
+.result-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 8px 0;
+
+    padding: 12px 14px;
+
+    border-radius: 14px;
+
+    background: rgba(15, 23, 42, 0.55);
+}
+
+.result-row span {
+    color: #cbd5e1;
+
+    font-size: 14px;
+}
+
+.result-row strong {
+    color: #facc15;
+
+    font-size: 18px;
+}
+
+.modal-secondary-button {
+    display: block;
+
+    width: 100%;
+
+    min-height: 49px;
+
+    margin-top: 12px;
+
+    padding: 12px;
+
+    border: 0;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #475569,
+            #334155
+        );
+
+    font-size: 14px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.12),
+        0 4px 0 #1e293b;
+}
+
+
+/* =========================================================
+   19. AJUSTES PARA CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .logo-area {
+        margin-bottom: 22px;
+    }
+
+    .logo-bubbles {
+        transform: scale(0.88);
+
+        margin-bottom: 0;
+    }
+
+    .home-stats {
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        min-width: 110px;
+
+        padding: 10px 13px;
+    }
+
+    .levels-grid {
+        gap: 8px;
+    }
+
+    .level-button {
+        border-radius: 13px;
+
+        font-size: 15px;
+    }
+
+    .objective-description strong {
+        max-width: 165px;
+
+        font-size: 11px;
+    }
+
+    .game-bottom {
+        grid-template-columns: 70px 1fr 70px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .moves-card {
+        min-height: 57px;
+    }
+
+    .swap-button {
+        width: 59px;
+        height: 57px;
+    }
+
+    .shooter-preview {
+        gap: 14px;
+    }
+
+    .current-ball {
+        width: 43px;
+        height: 43px;
+    }
+
+    .next-ball {
+        width: 31px;
+        height: 31px;
+    }
+}
+
+
+/* =========================================================
+   20. CELULARES BAIXOS / MODO PAISAGEM
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+    .logo-bubbles {
+        transform: scale(0.72);
+
+        height: 80px;
+
+        margin-bottom: -5px;
+    }
+
+    .logo-area {
+        margin-bottom: 14px;
+    }
+
+    .logo-area h1 {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        margin-top: 8px;
+
+        font-size: 14px;
+    }
+
+    .home-stats {
+        margin-bottom: 13px;
+    }
+
+    .main-button {
+        min-height: 48px;
+
+        margin: 8px 0;
+    }
+
+    .game-version {
+        margin-top: 14px;
+    }
+
+    .game-header {
+        min-height: 56px;
+    }
+
+    .objective-bar {
+        min-height: 50px;
+    }
+
+    .game-bottom {
+        min-height: 79px;
+    }
+
+    .moves-card,
+    .swap-button {
+        height: 55px;
+        min-height: 55px;
+    }
+
+    .current-ball {
+        width: 40px;
+        height: 40px;
+    }
+
+    .next-ball {
+        width: 29px;
+        height: 29px;
+    }
+}
+
+
+/* =========================================================
+   21. DESKTOP
+   ========================================================= */
+
+@media (min-width: 621px) {
+
+    body {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #020617;
+    }
+
+    #app {
+        height: min(100vh, 900px);
+
+        border-radius: 18px;
+
+        border:
+            1px solid rgba(255, 255, 255, 0.08);
+    }
+}

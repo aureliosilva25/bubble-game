@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<link rel="icon" href="icons/favicon.ico">
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="icons/icon-32.png"
+>
+
+<link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="icons/apple-touch-icon.png"
+>
+
+<meta name="theme-color" content="#111827">
+
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+>
+
+<meta
+    name="apple-mobile-web-app-title"
+    content="Bubble Color"
+>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta
+        name="theme-color"
+        content="#111827"
+    >
+
+    <title>Bubble Color</title>
+<link rel="manifest" href="manifest.json">
+
+<link rel="icon" href="icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bubble Color">    <link
+        rel="stylesheet"
+        href="css/style.css?v=8"
+    >
+
+</head>
+
+
+<body>
+
+    <div id="app">
+
+
+        <!-- =================================================
+             TELA INICIAL
+             ================================================= -->
+
+        <section
+            id="homeScreen"
+            class="screen active"
+        >
+
+            <div class="home-content">
+
+                <div class="logo-area">
+
+                    <div class="logo-bubbles">
+
+                        <span class="logo-ball red"></span>
+                        <span class="logo-ball blue"></span>
+                        <span class="logo-ball green"></span>
+                        <span class="logo-ball yellow"></span>
+
+                    </div>
+
+
+                    <h1>
+                        BUBBLE
+                        <span>COLOR</span>
+                    </h1>
+
+
+                    <p class="subtitle">
+                        Combine, estoure e avance!
+                    </p>
+
+                </div>
+
+
+                <div class="home-stats">
+
+                    <div class="stat-card">
+
+                        <span>
+                            ⭐
+                        </span>
+
+                        <strong id="homeStars">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>
+                            🪙
+                        </span>
+
+                        <strong id="homeCoins">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="home-buttons">
+
+                    <button
+                        id="btnContinue"
+                        class="main-button primary-button"
+                        type="button"
+                    >
+
+                        ▶ CONTINUAR
+
+                    </button>
+
+
+                    <button
+                        id="btnPlay"
+                        class="main-button secondary-button"
+                        type="button"
+                    >
+
+                        🗺️ ESCOLHER FASE
+
+                    </button>
+
+                </div>
+
+
+                <p class="game-version">
+                    Bubble Color
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAPA DE FASES
+             ================================================= -->
+
+        <section
+            id="levelsScreen"
+            class="screen"
+        >
+
+            <header class="top-bar">
+
+                <button
+                    id="btnLevelsBack"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Voltar"
+                >
+
+                    ←
+
+                </button>
+
+
+                <div class="top-title">
+
+                    <strong>
+                        FASES
+                    </strong>
+
+                    <small id="progressText">
+                        1 / 100
+                    </small>
+
+                </div>
+
+
+                <div class="coins-display">
+
+                    🪙
+
+                    <span id="levelCoins">
+                        0
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <div class="progress-container">
+
+                <div class="progress-track">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <main class="levels-content">
+
+                <div
+                    id="levelsGrid"
+                    class="levels-grid"
+                ></div>
+
+            </main>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TELA DO JOGO
+             ================================================= -->
+
+        <section
+            id="gameScreen"
+            class="screen"
+        >
+
+            <header class="game-header">
+
+                <button
+                    id="btnGameBack"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Pausar"
+                >
+
+                    ←
+
+                </button>
+
+
+                <div class="level-display">
+
+                    <small>
+                        FASE
+                    </small>
+
+                    <strong id="currentLevel">
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="score-display">
+
+                    <small>
+                        PONTOS
+                    </small>
+
+                    <strong id="score">
+                        0
+                    </strong>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- OBJETIVO -->
+
+            <div class="objective-bar">
+
+                <div class="objective-description">
+
+                    <span
+                        id="objectiveIcon"
+                        class="objective-icon"
+                    >
+                        🎯
+                    </span>
+
+
+                    <div>
+
+                        <small>
+                            OBJETIVO
+                        </small>
+
+                        <strong id="objectiveText">
+                            Complete a fase
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="target-display">
+
+                    <small>
+                        META
+                    </small>
+
+                    <strong id="targetScore">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ÁREA PRINCIPAL DO JOGO -->
+
+            <div class="game-board-wrapper">
+
+                <canvas id="gameCanvas"></canvas>
+
+
+                <div
+                    id="comboMessage"
+                    class="combo-message"
+                >
+
+                    COMBO!
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INFORMAÇÕES INFERIORES -->
+
+            <div class="game-bottom">
+
+
+                <div class="moves-card">
+
+                    <small>
+                        JOGADAS
+                    </small>
+
+                    <strong id="movesLeft">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="shooter-preview">
+
+                    <div class="next-container">
+
+                        <small>
+                            PRÓXIMA
+                        </small>
+
+                        <div
+                            id="nextBall"
+                            class="preview-ball next-ball"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="current-container">
+
+                        <small>
+                            ATUAL
+                        </small>
+
+                        <div
+                            id="currentBall"
+                            class="preview-ball current-ball"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <button
+                    id="btnSwap"
+                    class="swap-button"
+                    type="button"
+                >
+
+                    ⇄
+
+                    <small>
+                        TROCAR
+                    </small>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MODAL DE VITÓRIA
+             ================================================= -->
+
+        <div
+            id="winModal"
+            class="modal"
+        >
+
+            <div class="modal-card win-card">
+
+                <div class="modal-icon">
+                    🏆
+                </div>
+
+
+                <h2>
+                    FASE CONCLUÍDA!
+                </h2>
+
+
+                <div
+                    id="winStars"
+                    class="win-stars"
+                >
+
+                    ⭐⭐⭐
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span>
+                        Pontuação
+                    </span>
+
+                    <strong id="finalScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <span>
+                        Recompensa
+                    </span>
+
+                    <strong>
+
+                        🪙
+
+                        <span id="coinReward">
+                            0
+                        </span>
+
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="btnNextLevel"
+                    class="main-button primary-button"
+                    type="button"
+                >
+
+                    PRÓXIMA FASE ▶
+
+                </button>
+
+
+                <button
+                    id="btnWinLevels"
+                    class="modal-secondary-button"
+                    type="button"
+                >
+
+                    MAPA DE FASES
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MODAL DE DERROTA
+             ================================================= -->
+
+        <div
+            id="loseModal"
+            class="modal"
+        >
+
+            <div class="modal-card lose-card">
+
+                <div class="modal-icon">
+                    😵
+                </div>
+
+
+                <h2>
+                    TENTE NOVAMENTE
+                </h2>
+
+
+                <p>
+                    Você ainda consegue!
+                </p>
+
+
+                <button
+                    id="btnRetry"
+                    class="main-button primary-button"
+                    type="button"
+                >
+
+                    🔄 TENTAR NOVAMENTE
+
+                </button>
+
+
+                <button
+                    id="btnLoseLevels"
+                    class="modal-secondary-button"
+                    type="button"
+                >
+
+                    MAPA DE FASES
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MODAL DE PAUSA
+             ================================================= -->
+
+        <div
+            id="pauseModal"
+            class="modal"
+        >
+
+            <div class="modal-card">
+
+                <div class="modal-icon">
+                    ⏸️
+                </div>
+
+
+                <h2>
+                    JOGO PAUSADO
+                </h2>
+
+
+                <button
+                    id="btnResume"
+                    class="main-button primary-button"
+                    type="button"
+                >
+
+                    ▶ CONTINUAR
+
+                </button>
+
+
+                <button
+                    id="btnExitLevel"
+                    class="modal-secondary-button"
+                    type="button"
+                >
+
+                    SAIR DA FASE
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SCRIPTS DO JOGO
+
+         IMPORTANTE:
+         levels.js precisa carregar antes de game.js.
+         ===================================================== -->
+
+    <script src="js/levels.js?v=8"></script>
+
+    <script src="js/game.js?v=8"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .then(() => {
+                console.log("Bubble Color PWA ativo");
+            })
+            .catch(error => {
+                console.error("Erro no PWA:", error);
+            });
+    });
+}
+</script>
+</body>
+<link rel="manifest" href="manifest.json">
+
+<link rel="icon" href="icons/favicon.ico">
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="icons/icon-32.png"
+>
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="icons/apple-touch-icon.png"
+>
+
+<meta name="theme-color" content="#111827">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="Bubble Color"
+><link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon.ico">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bubble Color">
+</html>
