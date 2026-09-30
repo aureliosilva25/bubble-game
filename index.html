@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Bubble Color</title>
+<link rel="stylesheet" href="css/style.css?v=8">
+</head>
+<body>
+<div id="app">
+<section id="homeScreen" class="screen active"><div class="center"><h1>BUBBLE <span>COLOR</span></h1><p>Combine, estoure e avance!</p><div class="stats">⭐ <b id="homeStars">0</b>　🪙 <b id="homeCoins">0</b></div><button id="btnContinue">▶ CONTINUAR</button><button id="btnPlay">🗺️ ESCOLHER FASE</button></div></section>
+<section id="levelsScreen" class="screen"><header><button id="btnLevelsBack">←</button><b>FASES</b><span>🪙 <b id="levelCoins">0</b></span></header><div class="progress"><div id="progressFill"></div></div><small id="progressText">1 / 100</small><div id="levelsGrid" class="grid"></div></section>
+<section id="gameScreen" class="screen"><header><button id="btnGameBack">←</button><span>FASE <b id="currentLevel">1</b></span><span>PONTOS <b id="score">0</b></span></header><div class="objective"><span><b id="objectiveIcon">🎯</b> <span id="objectiveText">Objetivo</span></span><span>META <b id="targetScore">0</b></span></div><div class="board"><canvas id="gameCanvas"></canvas><div id="comboMessage">COMBO!</div></div><footer><span>JOGADAS <b id="movesLeft">0</b></span><div>PRÓXIMA <i id="nextBall"></i> ATUAL <i id="currentBall"></i></div><button id="btnSwap">⇄</button></footer></section>
+<div id="winModal" class="modal"><div class="card"><h2>🏆 FASE CONCLUÍDA!</h2><div id="winStars">⭐⭐⭐</div><p>Pontuação: <b id="finalScore">0</b></p><p>Recompensa: 🪙 <b id="coinReward">0</b></p><button id="btnNextLevel">PRÓXIMA FASE ▶</button><button id="btnWinLevels">MAPA DE FASES</button></div></div>
+<div id="loseModal" class="modal"><div class="card"><h2>😵 TENTE NOVAMENTE</h2><button id="btnRetry">🔄 TENTAR NOVAMENTE</button><button id="btnLoseLevels">MAPA DE FASES</button></div></div>
+<div id="pauseModal" class="modal"><div class="card"><h2>⏸️ PAUSADO</h2><button id="btnResume">▶ CONTINUAR</button><button id="btnExitLevel">SAIR DA FASE</button></div></div>
+</div>
+<script src="js/levels.js?v=8"></script>
+<script src="js/game.js?v=8"></script>
+</body></html>

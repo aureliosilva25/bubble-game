@@ -1,0 +1,49 @@
+"use strict";
+const $=id=>document.getElementById(id),canvas=$("gameCanvas"),ctx=canvas.getContext("2d"),COLS=9,SAVE="bubbleColorSaveV1";
+const screens=[$("homeScreen"),$("levelsScreen"),$("gameScreen")],modals=[$("winModal"),$("loseModal"),$("pauseModal")];
+let radius=18,diam=36,rowH=31,ox=0,oy=12,levelNo=1,level=null,board=[],score=0,moves=0,current=null,next=null,shot=null,running=false,aiming=false,locked=false,ax=0,ay=0,combo=0,raf=null;
+let data={unlockedLevel:1,coins:0,stars:{},highScores:{}};
+function load(){try{let x=localStorage.getItem(SAVE);if(x)data={...data,...JSON.parse(x)}}catch(e){}data.unlockedLevel=Math.min(100,Math.max(1,+data.unlockedLevel||1));data.stars=data.stars||{};data.highScores=data.highScores||{};home()}
+function save(){localStorage.setItem(SAVE,JSON.stringify(data))}
+function home(){$("homeStars").textContent=Object.values(data.stars).reduce((a,v)=>a+(+v||0),0);$("homeCoins").textContent=data.coins||0}
+function show(s){screens.forEach(x=>x.classList.remove("active"));s.classList.add("active")}
+function close(){modals.forEach(x=>x.classList.remove("show"))}
+function levels(){running=false;shot=null;locked=false;if(raf)cancelAnimationFrame(raf);raf=null;close();show($("levelsScreen"));map()}
+function map(){let g=$("levelsGrid");g.innerHTML="";for(let n=1;n<=100;n++){let b=document.createElement("button");b.className="level-button";if(n>data.unlockedLevel){b.classList.add("locked");b.textContent="🔒"}else{b.innerHTML="<b>"+n+"</b>";let s=data.stars[n]||0;if(s){b.classList.add("completed");b.innerHTML+='<span class="level-stars">'+[1,2,3].map(i=>i<=s?"⭐":"☆").join("")+"</span>"}if(n===data.unlockedLevel)b.classList.add("current");b.onclick=()=>start(n)}g.appendChild(b)}$("progressText").textContent=data.unlockedLevel+" / 100";$("progressFill").style.width=data.unlockedLevel+"%";$("levelCoins").textContent=data.coins}
+function resize(){let r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);canvas.width=r.width*dpr;canvas.height=r.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);diam=(r.width-12)/(COLS+.5);radius=diam/2;rowH=diam*.866;ox=(r.width-COLS*diam)/2}
+function pos(r,c){return{x:ox+radius+c*diam+(r%2?radius:0),y:oy+radius+r*rowH}}
+function bubble(x,y,color){let g=ctx.createRadialGradient(x-radius*.3,y-radius*.35,2,x,y,radius);g.addColorStop(0,"white");g.addColorStop(.15,color);g.addColorStop(1,color);ctx.beginPath();ctx.arc(x,y,radius-1,0,Math.PI*2);ctx.fillStyle=g;ctx.fill()}
+function colors(){let s=new Set;board.forEach(r=>r&&r.forEach(c=>c&&s.add(c)));return[...s]}
+function rand(){let c=colors();if(!c.length)c=getLevelColors(levelNo);return c[Math.floor(Math.random()*c.length)]||COLORS[0]}
+function ui(){$("currentLevel").textContent=levelNo;$("score").textContent=score;$("movesLeft").textContent=moves;$("targetScore").textContent=level.targetScore;let i=getChallengeInfo(level);$("objectiveIcon").textContent=i.icon;$("objectiveText").textContent=i.text;$("currentBall").style.background=current;$("nextBall").style.background=next}
+function start(n){levelNo=n;level=LEVELS[n-1];close();show($("gameScreen"));score=0;moves=level.moves;combo=0;shot=null;running=true;aiming=false;locked=false;requestAnimationFrame(()=>{resize();board=generateLevelBoard(n,COLS);current=rand();next=rand();ui();if(raf)cancelAnimationFrame(raf);loop()})}
+function draw(){let r=canvas.getBoundingClientRect();ctx.clearRect(0,0,r.width,r.height);for(let y=0;y<board.length;y++)for(let x=0;x<COLS;x++)if(board[y]?.[x]){let p=pos(y,x);bubble(p.x,p.y,board[y][x])}}
+function shooter(){let r=canvas.getBoundingClientRect();return{x:r.width/2,y:r.height-radius-12}}
+function pointer(e){let r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+function dir(x,y){let s=shooter(),dx=x-s.x,dy=Math.min(y-s.y,-40),l=Math.hypot(dx,dy)||1,xx=dx/l,yy=dy/l;if(yy>-.25){yy=-.25;xx=(xx<0?-1:1)*Math.sqrt(1-yy*yy)}return{x:xx,y:yy}}
+function guide(){let s=shooter(),d=dir(ax,ay),r=canvas.getBoundingClientRect(),x=s.x,y=s.y,dx=d.x;for(let i=0;i<28;i++){x+=dx*13;y+=d.y*13;if(x<radius){x=radius;dx*=-1}if(x>r.width-radius){x=r.width-radius;dx*=-1}ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fillStyle="#ffffffaa";ctx.fill();if(y<radius)break}}
+function loop(){if(!running){raf=null;return}draw();if(aiming&&!shot)guide();if(shot){updateShot();if(shot)bubble(shot.x,shot.y,shot.color)}raf=requestAnimationFrame(loop)}
+function collision(){if(!shot)return false;for(let r=0;r<board.length;r++)for(let c=0;c<COLS;c++)if(board[r]?.[c]){let p=pos(r,c);if(Math.hypot(shot.x-p.x,shot.y-p.y)<=diam*.92)return true}return false}
+function ensure(r){while(board.length<=r)board.push(new Array(COLS).fill(null))}
+function nearest(x,y){let best=null,bd=Infinity,max=Math.max(board.length+3,12);for(let r=0;r<max;r++){ensure(r);for(let c=0;c<COLS;c++)if(!board[r][c]){let p=pos(r,c),d=Math.hypot(x-p.x,y-p.y);if(d<bd){bd=d;best={r,c}}}}return best}
+function updateShot(){let rect=canvas.getBoundingClientRect();shot.x+=shot.vx;shot.y+=shot.vy;if(shot.x-radius<=0){shot.x=radius;shot.vx=Math.abs(shot.vx)}if(shot.x+radius>=rect.width){shot.x=rect.width-radius;shot.vx=-Math.abs(shot.vx)}if(shot.y-radius<=oy||collision()){attach()}}
+function attach(){if(!shot)return;let color=shot.color,t=nearest(shot.x,shot.y);if(!t){shot=null;state();return}board[t.r][t.c]=color;shot=null;resolve(t.r,t.c)}
+function neighbors(r,c){let d=r%2===0?[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]]:[[-1,0],[-1,1],[0,-1],[0,1],[1,0],[1,1]];return d.map(v=>({r:r+v[0],c:c+v[1]})).filter(v=>v.r>=0&&v.c>=0&&v.c<COLS)}
+function group(sr,sc,color){let out=[],q=[{r:sr,c:sc}],seen=new Set;while(q.length){let a=q.shift(),k=a.r+":"+a.c;if(seen.has(k))continue;seen.add(k);if(a.r<0||a.r>=board.length||board[a.r]?.[a.c]!==color)continue;out.push(a);neighbors(a.r,a.c).forEach(n=>q.push(n))}return out}
+function floating(){let keep=new Set,q=[];for(let c=0;c<COLS;c++)if(board[0]?.[c])q.push({r:0,c});while(q.length){let a=q.shift(),k=a.r+":"+a.c;if(keep.has(k)||!board[a.r]?.[a.c])continue;keep.add(k);neighbors(a.r,a.c).forEach(n=>{if(board[n.r]?.[n.c])q.push(n)})}let n=0;for(let r=0;r<board.length;r++)for(let c=0;c<COLS;c++)if(board[r]?.[c]&&!keep.has(r+":"+c)){board[r][c]=null;n++}return n}
+function add(n){score+=n;$("score").textContent=score}
+function resolve(r,c){let g=group(r,c,board[r][c]);if(g.length>=3){combo++;g.forEach(a=>board[a.r][a.c]=null);add(g.length*100+Math.max(0,combo-1)*50);let f=floating();if(f)add(f*150)}else combo=0;while(board.length>1&&!board.at(-1).some(Boolean))board.pop();ui();state()}
+function remaining(){let n=0;board.forEach(r=>r.forEach(c=>{if(c)n++}));return n}
+function won(){if(remaining()===0)return true;if(levelNo<=10)return score>=level.targetScore;if(level.challenge===CHALLENGES.CLEAR_ALL)return false;return score>=level.targetScore}
+function danger(){let y=shooter().y-diam*1.35;for(let r=0;r<board.length;r++)for(let c=0;c<COLS;c++)if(board[r]?.[c]&&pos(r,c).y+radius>=y)return true;return false}
+function nextBall(){if(!running)return;current=next;if(colors().length&&!colors().includes(current))current=rand();next=rand();locked=false;aiming=false;ui()}
+function state(){if(!running)return;if(won()){win();return}if(moves<=0||danger()){lose();return}nextBall()}
+function win(){if(!running)return;running=false;locked=true;add(moves*50);let stars=calculateStars(score,level.targetScore,moves),old=data.stars[levelNo]||0;if(stars>old)data.stars[levelNo]=stars;data.highScores[levelNo]=Math.max(data.highScores[levelNo]||0,score);let reward=old?Math.max(2,Math.floor(level.reward*.25)):level.reward;data.coins=(+data.coins||0)+reward;if(levelNo<100)data.unlockedLevel=Math.max(data.unlockedLevel,levelNo+1);save();home();$("winStars").textContent=[1,2,3].map(i=>i<=stars?"⭐":"☆").join("");$("finalScore").textContent=score;$("coinReward").textContent=reward;setTimeout(()=>$("winModal").classList.add("show"),200)}
+function lose(){if(!running)return;running=false;locked=true;setTimeout(()=>$("loseModal").classList.add("show"),200)}
+canvas.onpointerdown=e=>{if(!running||shot||locked)return;let p=pointer(e),s=shooter();if(p.y>=s.y+20)return;aiming=true;ax=p.x;ay=p.y}
+canvas.onpointermove=e=>{if(aiming){let p=pointer(e);ax=p.x;ay=p.y}}
+canvas.onpointerup=e=>{if(!aiming||shot||locked)return;let p=pointer(e);ax=p.x;ay=p.y;aiming=false;locked=true;let s=shooter(),d=dir(ax,ay),speed=Math.max(7,radius*.52);shot={x:s.x,y:s.y,vx:d.x*speed,vy:d.y*speed,color:current};moves--;ui()}
+$("btnSwap").onclick=()=>{if(running&&!shot&&!locked){[current,next]=[next,current];ui()}};$("btnPlay").onclick=levels;$("btnContinue").onclick=()=>start(data.unlockedLevel);$("btnLevelsBack").onclick=()=>{show($("homeScreen"));home()};$("btnGameBack").onclick=()=>{if(running){running=false;if(raf)cancelAnimationFrame(raf);raf=null;$("pauseModal").classList.add("show")}};$("btnResume").onclick=()=>{$("pauseModal").classList.remove("show");running=true;loop()};$("btnExitLevel").onclick=levels;$("btnRetry").onclick=()=>start(levelNo);$("btnLoseLevels").onclick=levels;$("btnWinLevels").onclick=levels;$("btnNextLevel").onclick=()=>levelNo<100?start(levelNo+1):levels();
+window.onresize=()=>{if($("gameScreen").classList.contains("active"))resize()};
+function init(){load();close();show($("homeScreen"));console.log("Bubble Color V8 carregado - 100 fases")}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
