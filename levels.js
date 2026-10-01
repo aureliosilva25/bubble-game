@@ -1,0 +1,1 @@
+const COLORS=["#ff4d6d","#ffd43b","#38d996","#4da3ff","#a66cff","#ff8c42"];window.LEVELS=Array.from({length:100},(_,i)=>({number:i+1,rows:Math.min(4+Math.floor(i/12),9),colors:COLORS.slice(0,Math.min(3+Math.floor(i/15),6)),shots:Math.max(10,24-Math.floor(i/8))}));
